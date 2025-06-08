@@ -8,7 +8,7 @@ import {ConfigService} from "./services/config/config.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ticketSales2025';
+  title = 'Travels';
 
   constructor(
     private test: ObservableExampleService,

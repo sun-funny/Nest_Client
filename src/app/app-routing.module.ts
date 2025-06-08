@@ -1,31 +1,15 @@
-import {inject, NgModule} from '@angular/core';
-import {CanActivateFn, PreloadAllModules, Router, RouterModule, Routes} from '@angular/router';
-import {AuthService} from "./services/auth/auth.service";
-import {AuthGuard} from "./shared/guards/auth.guard";
-
-const authGuardFunc: CanActivateFn = (activeRoute, activeRouter) => {
-  const router = inject(Router);
-  const authService = inject(AuthService);
-  if (!authService.isAuthenticated) {
-    router.navigate(['auth']);
-  }
-  return true;
-}
+import {NgModule} from '@angular/core';
+import {PreloadAllModules, Router, RouterModule, Routes} from '@angular/router';
 
 
 const routes: Routes = [
   {
-    path: 'auth',
-    loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule),
-  },
-  {
     path: 'tickets',
     loadChildren: () => import('./pages/tickets/tickets.module').then(m => m.TicketsModule),
-    canActivate: [AuthGuard],
   },
   {
     path: '**',
-    redirectTo: 'auth'
+    redirectTo: 'main'
   }
 ];
 
@@ -38,3 +22,8 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 }
+
+/*  {
+    path: 'main',
+    loadChildren: () => import('./pages/main/main.module').then(m => m.AuthModule),
+  },*/
